@@ -53,11 +53,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string']
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new user instances after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
@@ -68,6 +69,11 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'student'
         ]);
+    }
+
+    protected function registerUser(Request $request){
+
     }
 }

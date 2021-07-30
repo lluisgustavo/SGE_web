@@ -16,19 +16,6 @@
                             @csrf
 
                             <!-- Usuário -->
-                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                    </div>
-                                    <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome') }}" type="text" name="name" value="{{ old('name') }}" required autofocus>
-                                </div>
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
@@ -243,7 +230,7 @@
 
     <script type="text/javascript">
         $(document).ready((function() {
-            $('input[name=person_birthday]').mask('00/00/0000');
+            //$('input[name=person_birthday]').mask('00/00/0000');
             $('input[name=person_cpf]').mask('000.000.000-00', {reverse: true});
             $('input[name=person_phone').mask("(99) 99999-9999")
                 .focusout(function (event) {
@@ -258,17 +245,6 @@
                         element.mask("(99) 9999-99999");
                     }
                 });
-
-            /*var MaskBehavior = function (val) {
-                    return val.replace(/\D/g, '').length === 9 ? '00000-0000' : '0000-00009';
-                },
-                Options = {
-                    onKeyPress: function (val, e, field, options) {
-                        field.mask(MaskBehavior.apply({}, arguments), options);
-                    }
-                };
-
-            $('.input[name=person_phone]').mask(MaskBehavior, Options);*/
 
             camposObrigatorios = function(campo){
                 let elem = $('.ob');
