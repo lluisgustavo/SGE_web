@@ -72,8 +72,8 @@ Inside folder storage:
 - - - -
 
 ## Acknowledgements <a name="acknowledgements"></a>
-[Creative Tim](www.creative-tim.com)
-[Laravel](www.laravel.com) 
+- [Creative Tim](www.creative-tim.com)
+- [Laravel](www.laravel.com) 
 
 ## Contact <a name="contact"></a>
 Created by [@lluisgustavo](https://www.luisdesouza.com.br/) and [@Namless](https://github.com/NamIess)
