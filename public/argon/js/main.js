@@ -77,7 +77,7 @@ ValidaCPF = function(element){
         CPF == "44444444444" || CPF == "55555555555" || CPF == "66666666666" || CPF == "77777777777" ||
         CPF == "88888888888" || CPF == "99999999999") {
         if($('.validaCPF')) $('.validaCPF').remove()
-        $(element).after('<small class="validaCPF text-danger">CPF inválido<small>');
+        $(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
         return false;
     }
 
@@ -89,7 +89,7 @@ ValidaCPF = function(element){
 
     if (Resto != parseInt(CPF.substring(9, 10)) ){
         if($('.validaCPF')) $('.validaCPF').remove()
-        $(element).after('<small class="validaCPF position-absolute top-2 text-danger">CPF inválido<small>');
+        $(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
         return false;
     }
     Soma = 0;
@@ -98,7 +98,7 @@ ValidaCPF = function(element){
     if ((Resto == 10) || (Resto == 11))  Resto = 0;
     if (Resto != parseInt(CPF.substring(10, 11) ) ){
         if($('.validaCPF')) $('.validaCPF').remove()
-        $(element).after('<small class="validaCPF text-danger">CPF inválido<small>');
+        $(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
         return false;
     }
     if($('.validaCPF')) $('.validaCPF').remove()
