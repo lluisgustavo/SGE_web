@@ -5,7 +5,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Argon Dashboard') }}</title>
+    <title>{{ config('app.name', 'SGE Painel de Controle') }}</title>
     <!-- Favicon -->
     <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
     <!-- Fonts -->
@@ -46,25 +46,25 @@
                 </div>
                 <a href=href="{{ route('profile.edit') }}" class="dropdown-item">
                     <i class="ni ni-single-02"></i>
-                    <span>My profile</span>
+                    <span>Meu Perfil</span>
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="ni ni-settings-gear-65"></i>
-                    <span>Settings</span>
+                    <span>Configurações</span>
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="ni ni-calendar-grid-58"></i>
-                    <span>Activity</span>
+                    <span>Atividade</span>
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="ni ni-support-16"></i>
-                    <span>Support</span>
+                    <span>Suporte</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                     <i class="ni ni-user-run"></i>
-                    <span>Logout</span>
+                    <span>Sair</span>
                 </a>
             </div>
         </li>
@@ -102,7 +102,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">
-                    <i class="ni ni-tv-2 text-primary"></i> Dashboard
+                    <i class="ni ni-tv-2 text-primary"></i> Painel de Controle
                 </a>
             </li>
             <li class="nav-item">
