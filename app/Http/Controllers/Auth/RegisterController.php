@@ -110,18 +110,42 @@ class RegisterController extends Controller
 
                 $person = Person::create(
                     [
-                        'first_name' => $request->address_street,
-                        'last_name' => $request->address_number,
-                        'cpf' => $request->address_complement,
-                        'birthday' => $request->address_district,
-                        'phone' => $request->address_city,
-                        'address_id' => $request->address_state,
-                        'user_id' => $request->address_country
+                        'first_name' => $request->person_first_name,
+                        'last_name' => $request->person_last_name,
+                        'cpf' => $request->person_cpf,
+                        'birthday' => $request->person_birthday,
+                        'phone' => $request->person_phone,
                     ]
                 );
-                dd($address);
 
-                //DB::commit();
+                $role = Role::create(
+                    [
+                        'role' => 'student'
+                    ]
+                );
+
+                $user = $this->create(
+                    [
+                        'email' => $request->email,
+                        'password' => Hash::make($request->password),
+                        'address_id' => $address->id,
+                        'person_id' => $person->id,
+                        'role_id' => $role->id,
+                        'created_at' => now(),
+                        'modified_at' => now()
+                    ]
+                );
+
+                $Address = Address::find($address->id);
+                $Address->person_id = $person->id;
+                $Address->save();
+
+                $Person = Person::find($person->id);
+                $Person->address_id = $address->id;
+                $Person->user_id = $user->id;
+                $Person->save();
+
+                DB::commit();
 
                 return response()->json(['status' => 1, 'msg'=>'Usuário criado com sucesso.']);
             }

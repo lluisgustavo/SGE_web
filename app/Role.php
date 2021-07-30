@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 class Role extends Model
 {
     use Notifiable;
-    use HasRoles;
 
     protected $table = "tb_roles";
     protected $primaryKey = "id";
