@@ -10,10 +10,9 @@ class Role extends Model
     use Notifiable;
     use HasRoles;
 
-    protected $table = "tb_users";
+    protected $table = "tb_roles";
     protected $primaryKey = "id";
     public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *

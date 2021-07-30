@@ -22,14 +22,17 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data)
+    public function create(Request $request)
     {
         return Address::create([
-            'name' => $data['street'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'created_at' => now(),
-            'updated_at' => now()
+            'street' => $request->address_street,
+            'number' => $request->address_number,
+            'complement' => $request->address_complement,
+            'district' => $request->address_district,
+            'city' => $request->address_city,
+            'state' => $request->address_state,
+            'country' => $request->address_country,
+            'ref' => $request->address_ref,
         ]);
     }
 
