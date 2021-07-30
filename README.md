@@ -26,6 +26,11 @@ I've learned a lot with this project, not only coding, but also other inner work
 ## Technologies Used <a name="technologies-used"></a>
 - PHP 7.2
 - Laravel 7 
+- Javascript
+- jQuery
+- Blade
+- CSS
+- MySQL
 
 ## IDEs Used <a name="ides-used"></a>
 - Visual Studio Code
