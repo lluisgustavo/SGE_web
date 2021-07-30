@@ -15,6 +15,7 @@ This is an web application developed in Laravel for the bilingual technical cour
 
 ## Project Status <a name="project-status"></a>
 Project is: _in progress_
+
 ![10%](https://progress-bar.dev/10)
  
 ## Introduction <a name="introduction"></a>
