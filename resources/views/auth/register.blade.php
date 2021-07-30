@@ -68,6 +68,62 @@
                             <div class="text-center">
                                 <h4>{{ __('Dados Pessoais') }}</h4>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Nome') }}" type="text" name="person_first_name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Sobrenome') }}" type="text" name="person_last_name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('CPF') }}" type="text" name="person_cpf" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Data de Nascimento') }}" type="date" name="person_birthday" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Telefone') }}" type="tel" name="person_phone" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Dados Pessoais -->
 
 
