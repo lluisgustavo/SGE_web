@@ -6,34 +6,22 @@
     <div class="container mt--8 pb-5">
         <!-- Table -->
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-10 col-md-10">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-4"><small>{{ __('Sign up with') }}</small></div>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-neutral btn-icon mr-4">
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/github.svg"></span>
-                                <span class="btn-inner--text">{{ __('Github') }}</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">{{ __('Google') }}</span>
-                            </a>
-                        </div>
-                    </div>
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <small>{{ __('Or sign up with credentials') }}</small>
+                            <h4>{{ __('Crie sua conta') }}</h4>
                         </div>
                         <form role="form" method="POST" action="{{ route('register') }}">
                             @csrf
 
+                            <!-- Usuário -->
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome') }}" type="text" name="name" value="{{ old('name') }}" required autofocus>
                                 </div>
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -59,7 +47,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" type="password" name="password" required>
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Senha') }}" type="password" name="password" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -72,24 +60,123 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required>
+                                    <input class="form-control" placeholder="{{ __('Confirmar Senha') }}" type="password" name="password_confirmation" required>
                                 </div>
                             </div>
-                            <div class="text-muted font-italic">
-                                <small>{{ __('password strength') }}: <span class="text-success font-weight-700">{{ __('strong') }}strong</span></small>
+
+                            <!-- Dados Pessoais -->
+                            <div class="text-center">
+                                <h4>{{ __('Dados Pessoais') }}</h4>
                             </div>
-                            <div class="row my-4">
-                                <div class="col-12">
-                                    <div class="custom-control custom-control-alternative custom-checkbox">
-                                        <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                        <label class="custom-control-label" for="customCheckRegister">
-                                            <span class="text-muted">{{ __('I agree with the') }} <a href="#!">{{ __('Privacy Policy') }}</a></span>
-                                        </label>
+                            <!-- Dados Pessoais -->
+
+
+                                <!-- Endereço -->
+                            <div class="text-center">
+                                <h4>{{ __('Endereço') }}</h4>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('CEP') }}" type="text" name="address_postalcode" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Rua') }}" type="text" name="address_street" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Número') }}" type="text" name="address_number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Complemento') }}" type="text" name="address_complement" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Bairro') }}" type="text" name="address_district" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Cidade') }}" type="text" name="address_city" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('Estado') }}" type="text" name="address_state" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="{{ __('País') }}" type="text" name="address_country" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="{{ __('Referência') }}" type="text" name="address_ref" required>
+                                </div>
+                            </div>
+                            <!-- Endereço -->
+
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary mt-4">{{ __('Create account') }}</button>
+                                <button type="submit" class="btn btn-primary mt-4">{{ __('Criar conta') }}</button>
                             </div>
                         </form>
                     </div>
