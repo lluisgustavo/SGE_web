@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('argon') }}/img/brand/white.png" />
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -16,7 +16,7 @@
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Navegação Lateral">
                             <span></span>
                             <span></span>
                         </button>
@@ -25,12 +25,15 @@
             </div>
             <!-- Navbar items -->
             <ul class="navbar-nav ml-auto">
+                @auth
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('home') }}">
                         <i class="ni ni-planet"></i>
-                        <span class="nav-link-inner--text">{{ __('Dashboard') }}</span>
+                        <span class="nav-link-inner--text">{{ __('Painel de Controle') }}</span>
                     </a>
                 </li>
+                @endauth
+                @guest
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('register') }}">
                         <i class="ni ni-circle-08"></i>
@@ -43,12 +46,15 @@
                         <span class="nav-link-inner--text">{{ __('Login') }}</span>
                     </a>
                 </li>
+                @endguest
+                @auth
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('profile.edit') }}">
                         <i class="ni ni-single-02"></i>
                         <span class="nav-link-inner--text">{{ __('Profile') }}</span>
                     </a>
                 </li>
+                @endauth
             </ul>
         </div>
     </div>
