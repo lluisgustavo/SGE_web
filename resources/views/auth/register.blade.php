@@ -99,7 +99,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('CPF') }}" type="text" name="person_cpf" required>
+                                            <input onblur="ValidaCPF(this)" class="form-control ob" placeholder="{{ __('CPF') }}" type="text" name="person_cpf" required>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Data de Nascimento') }}" type="date" name="person_birthday" required>
+                                            <input class="form-control ob" placeholder="{{ __('Data de Nascimento') }}" type="date" data-mask="0000-0000" name="person_birthday" required>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Telefone') }}" type="tel" name="person_phone" required>
+                                            <input class="form-control ob" placeholder="{{ __('Telefone') }}" type="tel" name="person_phone" required>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input onblur="pesquisacep(this.value);" class="form-control" placeholder="{{ __('CEP') }}" type="text" name="address_postalcode" required>
+                                            <input onblur="pesquisacep(this.value);" class="form-control ob" placeholder="{{ __('CEP') }}" type="text" name="address_postalcode" required>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Rua') }}" type="text" name="address_street" required>
+                                            <input class="form-control ob" placeholder="{{ __('Rua') }}" type="text" name="address_street" required>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Número') }}" type="text" name="address_number" required>
+                                            <input class="form-control ob" placeholder="{{ __('Número') }}" type="text" name="address_number" required>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Complemento') }}" type="text" name="address_complement" required>
+                                            <input class="form-control" placeholder="{{ __('Complemento') }}" type="text" name="address_complement">
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Bairro') }}" type="text" name="address_district" required>
+                                            <input class="form-control ob" placeholder="{{ __('Bairro') }}" type="text" name="address_district" required>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Cidade') }}" type="text" name="address_city" required>
+                                            <input class="form-control ob" placeholder="{{ __('Cidade') }}" type="text" name="address_city" required>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('Estado') }}" type="text" name="address_state" required>
+                                            <input class="form-control ob" placeholder="{{ __('Estado') }}" type="text" name="address_state" required>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-home"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="{{ __('País') }}" type="text" name="address_country" required>
+                                            <input class="form-control ob" placeholder="{{ __('País') }}" type="text" name="address_country" required>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-home"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="{{ __('Referência') }}" type="text" name="address_ref" required>
+                                    <input class="form-control" placeholder="{{ __('Referência') }}" type="text" name="address_ref">
                                 </div>
                             </div>
                             <!-- Endereço -->
@@ -241,6 +241,32 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $(document).ready((function() {
+            $('input[name=person_birthday]').mask('00/00/0000');
+            $('input[name=person_cpf]').mask('000.000.000-00', {reverse: true});
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            var MaskBehavior = function (val) {
+                    return val.replace(/\D/g, '').length === 9 ? '00000-0000' : '0000-00009';
+                },
+                Options = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(MaskBehavior.apply({}, arguments), options);
+                    }
+                };
+
+            $('.input[name=person_phone]').mask(MaskBehavior, Options);
+
+            camposObrigatorios = function(campo){
+                let elem = $('.ob');
+                $.each(elem,function(i,v){
+                    if(campo == 1){
+                        $(v).attr('required',true);
+                    }else{
+                        $(v).attr('required',false);
+                    }
+                })
+            };
+        }));
+    </script>
 @endsection

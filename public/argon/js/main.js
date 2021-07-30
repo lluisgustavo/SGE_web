@@ -1,30 +1,3 @@
-$(document).ready((function() {
-    $('input[name=person_birthday]').mask('00/00/0000');
-    $('input[name=person_cpf]').mask('000.000.000-00', {reverse: true});
-
-    var MaskBehavior = function (val) {
-        return val.replace(/\D/g, '').length === 9 ? '00000-0000' : '0000-00009';
-        },
-        Options = {
-            onKeyPress: function (val, e, field, options) {
-            field.mask(MaskBehavior.apply({}, arguments), options);
-        }
-    };
-
-    $('.input[name=person_phone]').mask(MaskBehavior, Options);
-
-    camposObrigatorios = function(campo){
-        let elem = $('.ob');
-        $.each(elem,function(i,v){
-            if(campo == 1){
-                $(v).attr('required',true);
-            }else{
-                $(v).attr('required',false);
-            }
-        })
-    };
-}));
-
 function limpa_formulário_cep() {
     //Limpa valores do formulário de cep.
     $('input[name=address_street]').val("")
@@ -90,3 +63,44 @@ function pesquisacep(valor) {
         limpa_formulário_cep();
     }
 };
+
+
+ValidaCPF = function(element){
+    var Soma;
+    var Resto;
+    var CPF = $(element).val();
+    CPF = CPF.replace(/\./g,'');
+    CPF = CPF.replace(/-/g,'');
+    Soma = 0;
+
+    if (CPF == "00000000000" || CPF == "11111111111" || CPF == "22222222222" || CPF == "33333333333" ||
+        CPF == "44444444444" || CPF == "55555555555" || CPF == "66666666666" || CPF == "77777777777" ||
+        CPF == "88888888888" || CPF == "99999999999") {
+        if($('.validaCPF')) $('.validaCPF').remove()
+        $(element).after('<small class="validaCPF text-danger">CPF inválido<small>');
+        return false;
+    }
+
+    for (i=1; i<=9; i++) Soma = Soma + parseInt(CPF.substring(i-1, i)) * (11 - i);
+
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+
+    if (Resto != parseInt(CPF.substring(9, 10)) ){
+        if($('.validaCPF')) $('.validaCPF').remove()
+        $(element).after('<small class="validaCPF position-absolute top-2 text-danger">CPF inválido<small>');
+        return false;
+    }
+    Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(CPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(CPF.substring(10, 11) ) ){
+        if($('.validaCPF')) $('.validaCPF').remove()
+        $(element).after('<small class="validaCPF text-danger">CPF inválido<small>');
+        return false;
+    }
+    if($('.validaCPF')) $('.validaCPF').remove()
+    return true;
+}
