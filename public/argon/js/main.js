@@ -64,11 +64,11 @@ function pesquisacep(valor) {
     }
 };
 
-
 ValidaCPF = function(element){
+    if($(element).val.trim() == '') return false;
     var Soma;
     var Resto;
-    var CPF = $(element).val();
+    var CPF = $(element).val().trim();
     CPF = CPF.replace(/\./g,'');
     CPF = CPF.replace(/-/g,'');
     Soma = 0;

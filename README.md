@@ -15,6 +15,8 @@ This is an web application developed in Laravel for the bilingual technical cour
 
 ## Project Status <a name="project-status"></a>
 Project is: _in progress_
+
+![10%](https://progress-bar.dev/10)
  
 ## Introduction <a name="introduction"></a>
 
@@ -24,6 +26,11 @@ I've learned a lot with this project, not only coding, but also other inner work
 ## Technologies Used <a name="technologies-used"></a>
 - PHP 7.2
 - Laravel 7 
+- Javascript
+- jQuery
+- Blade
+- CSS
+- MySQL
 
 ## IDEs Used <a name="ides-used"></a>
 - Visual Studio Code
