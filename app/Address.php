@@ -7,7 +7,6 @@ use Illuminate\Notifications\Notifiable;
 
 class Address extends Model
 {
-
     use Notifiable;
 
     protected $table = "tb_address";

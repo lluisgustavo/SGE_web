@@ -43,4 +43,19 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'modified_at' => 'datetime',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
 }

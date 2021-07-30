@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Address;
+use App\Role;
 use Illuminate\Http\Request;
 
-class AddressController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,15 +22,9 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data)
+    public function create()
     {
-        return Address::create([
-            'name' => $data['street'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        //
     }
 
     /**
@@ -47,10 +41,10 @@ class AddressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $address)
+    public function show(Role $role)
     {
         //
     }
@@ -58,10 +52,10 @@ class AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $address)
+    public function edit(Role $role)
     {
         //
     }
@@ -70,10 +64,10 @@ class AddressController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Address  $address
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -81,10 +75,10 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy(Role $role)
     {
         //
     }

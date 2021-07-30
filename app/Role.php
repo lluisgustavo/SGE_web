@@ -5,11 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Person extends Model
+class Role extends Model
 {
     use Notifiable;
+    use HasRoles;
 
-    protected $table = "tb_people";
+    protected $table = "tb_users";
     protected $primaryKey = "id";
     public $timestamps = false;
 
@@ -19,13 +20,8 @@ class Person extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'cpf', 'birthday', 'phone', 'address_id', 'user_id'
+        'id', 'role'
     ];
-
-    public function address()
-    {
-        return $this->hasOne(Address::class, 'id');
-    }
 
     public function user()
     {
