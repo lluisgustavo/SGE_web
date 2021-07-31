@@ -118,12 +118,6 @@ class RegisterController extends Controller
                     ]
                 );
 
-                $role = Role::create(
-                    [
-                        'role' => 'student'
-                    ]
-                );
-
                 $user = $this->create(
                     [
                         'email' => $request->email,
@@ -136,6 +130,7 @@ class RegisterController extends Controller
                     ]
                 );
 
+                $user->assignRole('student');
                 $Address = Address::find($address->id);
                 $Address->person_id = $person->id;
                 $Address->save();
