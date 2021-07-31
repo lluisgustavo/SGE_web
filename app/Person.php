@@ -11,7 +11,6 @@ class Person extends Model
 
     protected $table = "tb_people";
     protected $primaryKey = "id";
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

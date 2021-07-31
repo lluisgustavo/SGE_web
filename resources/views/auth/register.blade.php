@@ -10,7 +10,7 @@
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <h4>{{ __('Crie sua conta') }}</h4>
+                            <h1>{{ __('Crie sua conta') }}</h4>
                         </div>
                         <form role="form" method="POST" action="{{ route('register') }}">
                             @csrf
@@ -53,7 +53,7 @@
 
                             <!-- Dados Pessoais -->
                             <div class="text-center">
-                                <h4>{{ __('Dados Pessoais') }}</h4>
+                                <h2>{{ __('Dados Pessoais') }}</h4>
                             </div>
 
                             <div class="row">
@@ -116,7 +116,7 @@
 
                                 <!-- Endereço -->
                             <div class="text-center">
-                                <h4>{{ __('Endereço') }}</h4>
+                                <h2>{{ __('Endereço') }}</h4>
                             </div>
 
                             <div class="row">
