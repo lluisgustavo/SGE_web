@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\User;
-use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Hash;
+use App\Person;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -14,10 +19,13 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request)
     {
+        $user = User::orderBy('id','DESC')->paginate(5);
+        $user->person = Person::find($user->id);
+        dd($user->person);
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+        return view('users.index',compact('user'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 

@@ -84,8 +84,8 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
+        $rolePermissions = Permission::join("tb_role_has_permissions","tb_role_has_permissions.permission_id","=","tb_permissions.id")
+            ->where("tb_role_has_permissions.role_id",$id)
             ->get();
 
         return view('roles.show',compact('role','rolePermissions'));
@@ -101,8 +101,8 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $permission = Permission::get();
-        $rolePermissions = DB::table("tb_role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        $rolePermissions = DB::table("tb_role_has_permissions")->where("tb_role_has_permissions.role_id",$id)
+            ->pluck('tb_role_has_permissions.permission_id','tb_role_has_permissions.permission_id')
             ->all();
 
         return view('roles.edit',compact('role','permission','rolePermissions'));
