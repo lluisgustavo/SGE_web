@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Address;
+use App\Person;
+use App\Role;
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -51,7 +56,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:tb_users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string']
         ]);
@@ -65,15 +70,85 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => 'student'
-        ]);
+            return User::create([
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'address_id' => 0,
+                'person_id' => 0,
+                'role_id' => 0,
+                'created_at' => now(),
+                'modified_at' => now()
+            ]);
     }
 
-    protected function registerUser(Request $request){
+    protected function register(Request $request){
+        try{
+            $validate = Validator::make($request->all(),[
+                'email' =>'required',
+                'password' =>'required'
+            ]);
 
+            if($validate){
+                DB::beginTransaction();
+
+                $address = Address::create(
+                    [
+                        'street' => $request->address_street,
+                        'number' => $request->address_number,
+                        'complement' => $request->address_complement,
+                        'district' => $request->address_district,
+                        'city' => $request->address_city,
+                        'state' => $request->address_state,
+                        'country' => $request->address_country,
+                        'postalcode' => $request->address_postalcode,
+                        'ref' => $request->address_ref
+                    ]
+                );
+
+                $person = Person::create(
+                    [
+                        'first_name' => $request->person_first_name,
+                        'last_name' => $request->person_last_name,
+                        'cpf' => $request->person_cpf,
+                        'birthday' => $request->person_birthday,
+                        'phone' => $request->person_phone,
+                    ]
+                );
+
+                $user = $this->create(
+                    [
+                        'email' => $request->email,
+                        'password' => Hash::make($request->password),
+                        'address_id' => $address->id,
+                        'person_id' => $person->id,
+                        'role_id' => 2,
+                        'created_at' => now(),
+                        'modified_at' => now()
+                    ]
+                );
+
+                $Address = Address::find($address->id);
+                $Address->person_id = $person->id;
+                $Address->save();
+
+                $Person = Person::find($person->id);
+                $Person->address_id = $address->id;
+                $Person->user_id = $user->id;
+                $Person->save();
+
+                $User = User::find($user->id);
+                $User->address_id = $address->id;
+                $User->person_id = $person->id;
+                $User->role_id = 2;
+                $User->save();
+
+                DB::commit();
+
+                return redirect("/login")->withSuccess('Usuário criado com sucesso.');
+            }
+        }catch(\Exception $ex){
+            DB::rollBack();
+            return  redirect()->withFail('Falha ao registrar o usuário.');
+        }
     }
 }

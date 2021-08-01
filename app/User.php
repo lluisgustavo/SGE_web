@@ -14,7 +14,6 @@ class User extends Authenticatable
 
     protected $table = "tb_users";
     protected $primaryKey = "id";
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'role'
+        'email', 'password', 'role',  'created_at', 'updated at'
     ];
 
     /**
@@ -34,13 +33,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var arrayemail_verified_at
-     */
-    protected $casts = [
-        'created_at' => 'datetime',
-        'modified_at' => 'datetime',
-    ];
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Address;
+use App\Student;
 use Illuminate\Http\Request;
 
-class AddressController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,18 +22,9 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return Address::create([
-            'street' => $request->address_street,
-            'number' => $request->address_number,
-            'complement' => $request->address_complement,
-            'district' => $request->address_district,
-            'city' => $request->address_city,
-            'state' => $request->address_state,
-            'country' => $request->address_country,
-            'ref' => $request->address_ref,
-        ]);
+        //
     }
 
     /**
@@ -50,10 +41,10 @@ class AddressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $address)
+    public function show(Student $student)
     {
         //
     }
@@ -61,10 +52,10 @@ class AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $address)
+    public function edit(Student $student)
     {
         //
     }
@@ -73,10 +64,10 @@ class AddressController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Address  $address
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -84,10 +75,10 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Address  $address
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy(Student $student)
     {
         //
     }

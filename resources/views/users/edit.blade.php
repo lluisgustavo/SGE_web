@@ -9,14 +9,12 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Usuários</h3>
+                                <h3 class="mb-0">Users</h3>
                             </div>
 
-                            @if(Auth::user()->role_id === 1)
-                                <div class="col-4 text-right">
-                                    <a href="{{ URL::to('users/create') }}" class="btn btn-sm btn-primary">Adicionar Usuário</a>
-                                </div>
-                            @endif
+                            <div class="col-4 text-right">
+                                <a href="" class="btn btn-sm btn-primary">Add user</a>
+                            </div>
                         </div>
                     </div>
 

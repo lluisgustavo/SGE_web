@@ -22,11 +22,16 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return Person::create([
+            'first_name' => $request->address_street,
+            'last_name' => $request->address_number,
+            'cpf' => $request->address_complement,
+            'birthday' => $request->address_district,
+            'phone' => $request->address_city,
+        ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *

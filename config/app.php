@@ -176,9 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Argon Theme
+         * Spatie Roles and Permissions
          */
-
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

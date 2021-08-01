@@ -4,13 +4,17 @@
     @include('layouts.headers.guest')
 
     <div class="container mt--8 pb-5">
-        <!-- Table -->
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-10">
                 <div class="card bg-secondary shadow border-0">
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <h4>{{ __('Crie sua conta') }}</h4>
+                            <h1>{{ __('Crie sua conta') }}</h1>
                         </div>
                         <form role="form" method="POST" action="{{ route('register') }}">
                             @csrf
@@ -53,7 +57,7 @@
 
                             <!-- Dados Pessoais -->
                             <div class="text-center">
-                                <h4>{{ __('Dados Pessoais') }}</h4>
+                                <h2>{{ __('Dados Pessoais') }}</h2>
                             </div>
 
                             <div class="row">
@@ -116,7 +120,7 @@
 
                                 <!-- Endereço -->
                             <div class="text-center">
-                                <h4>{{ __('Endereço') }}</h4>
+                                <h2>{{ __('Endereço') }}</h2>
                             </div>
 
                             <div class="row">

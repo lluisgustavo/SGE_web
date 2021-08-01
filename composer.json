@@ -15,7 +15,9 @@
         "laravel-frontend-presets/argon": "^1.1",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^2.4"
+        "laravel/ui": "^2.4",
+        "laravelcollective/html": "^6.2",
+        "spatie/laravel-permission": "^4.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -37,7 +39,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src"
+            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src",
+            "Database\\Seeders\\": "database/seeds/"
         },
         "classmap": [
             "database/seeds",
@@ -47,7 +50,9 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src"
+            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeds/"
         }
     },
     "minimum-stability": "dev",
