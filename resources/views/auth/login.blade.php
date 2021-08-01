@@ -7,15 +7,15 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
                             <small>
                                 <a href="{{ route('register') }}">{{ __('Criar nova conta') }}</a> {{ __('Ou entre com sua conta:') }}
-                            </small>
-                            <br>
-                            <small>
-                                {{ __('Usuário') }} <strong>admin@admin.com</strong>
-                                {{ __('Senha') }} <strong>admin123</strong>
                             </small>
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
@@ -39,7 +39,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Senha') }}" type="password" value="admin123" required>
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Senha') }}" type="password" value="" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
