@@ -21,11 +21,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = User::orderBy('id','DESC')->paginate(5);
-        $user->person = Person::find($user->id);
-        dd($user->person);
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('user'))
+        $users = User::select('tb_users.id as user_id', 'tb_users.email', DB::raw('format(tb_users.created_at, "d", "pt-br")'),
+            'tb_users.person_id', 'p.*')
+            ->join('tb_people as p', 'tb_users.person_id', 'p.id')
+            ->orderBy('id','DESC')
+            ->paginate(5);
+        return view('users.index',compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
