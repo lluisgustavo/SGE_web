@@ -25,27 +25,27 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                             <tr>
-                                <th scope="col">Name</th>
+                                <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Creation Date</th>
+                                <th scope="col">Entrou em</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $user):
+                                @foreach($users as $user):
                                 <tr>
-                                    <td>{{$user->person($user->person_id)}}</td>
+                                    <td>{{$user->first_name}} {{$user->last_name}} </td>
                                     <td>
-                                        <a href="mailto:admin@argon.com">admin@argon.com</a>
+                                        <a href="{{$user->email}}">{{$user->email}}</a>
                                     </td>
-                                    <td>12/02/2020 11:00</td>
+                                    <td>{{$user->created_at}}</td>
                                     <td class="text-right">
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="">Editar</a>
+                                                <a class="dropdown-item" href="{{ URL::to('users/' . $user->id . '/edit') }}">Editar</a>
                                             </div>
                                         </div>
                                     </td>
