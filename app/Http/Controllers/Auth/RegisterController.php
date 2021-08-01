@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Address;
 use App\Person;
 use App\Role;
 use App\User;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use http\Client\Response;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -85,7 +82,7 @@ class RegisterController extends Controller
     }
 
     protected function register(Request $request){
-        //try{
+        try{
             $validate = Validator::make($request->all(),[
                 'email' =>'required',
                 'password' =>'required'
@@ -124,13 +121,12 @@ class RegisterController extends Controller
                         'password' => Hash::make($request->password),
                         'address_id' => $address->id,
                         'person_id' => $person->id,
-                        'role_id' => $role->id,
+                        'role_id' => 2,
                         'created_at' => now(),
                         'modified_at' => now()
                     ]
                 );
 
-                $user->assignRole('student');
                 $Address = Address::find($address->id);
                 $Address->person_id = $person->id;
                 $Address->save();
@@ -140,13 +136,19 @@ class RegisterController extends Controller
                 $Person->user_id = $user->id;
                 $Person->save();
 
+                $User = User::find($user->id);
+                $User->address_id = $address->id;
+                $User->person_id = $person->id;
+                $User->role_id = 2;
+                $User->save();
+
                 DB::commit();
 
-                return response()->json(['status' => 1, 'msg'=>'Usuário criado com sucesso.']);
+                return redirect("/login")->withSuccess('Usuário criado com sucesso.');
             }
-        //}catch(\Exception $ex){
+        }catch(\Exception $ex){
             DB::rollBack();
-            return response()->json(['status' => 0,'msg'=>'Erro ao criar usuário.']);
-        //}
+            return  redirect()->withFail('Falha ao registrar o usuário.');
+        }
     }
 }
