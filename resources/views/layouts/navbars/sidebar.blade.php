@@ -94,6 +94,11 @@
                         <i class="fas fa-building"></i> {{ __('Departamentos') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.index') }}">
+                        <i class="fas fa-user"></i> {{ __('Usuários') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
