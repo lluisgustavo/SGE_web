@@ -63,6 +63,29 @@
                                             <input class="form-control" placeholder="{{ __('Confirmar Senha') }}" type="password" name="password_confirmation" required>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <select class="browser-default custom-select" name="role" required>
+                                                <option>Selecione</option>
+                                                @foreach($roles as $role)
+                                                    <option @if($user->id == $role->id) @endif value="{{$role->id}}">
+                                                        @if($role->name == 'admin')
+                                                            Administrador
+                                                        @elseif($role->name == 'student')
+                                                            Estudante
+                                                        @elseif($role->name == 'employee')
+                                                            Colaborador
+                                                        @elseif($role->name == 'teacher')
+                                                            Professor
+                                                        @endif
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary mt-4">{{ __('Editar Conta') }}</button>
