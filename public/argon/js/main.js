@@ -65,7 +65,7 @@ function pesquisacep(valor) {
 };
 
 ValidaCPF = function(element){
-    if($(element).val.trim() == '') return false;
+    if($(element).val().trim() == '') return false;
     var Soma;
     var Resto;
     var CPF = $(element).val().trim();
