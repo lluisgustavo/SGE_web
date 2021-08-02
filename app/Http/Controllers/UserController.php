@@ -21,10 +21,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::select('tb_users.id as user_id', 'tb_users.email', DB::raw('format(tb_users.created_at, "d", "pt-br")'),
-            'tb_users.person_id', 'p.*')
+        $users = User::select('tb_users.id as user_id', 'tb_users.email', 'tb_users.created_at',
+            'tb_users.person_id', 'p.first_name', 'p.last_name', 'p.cpf', 'p.birthday', 'p.phone', 'p.address_id as address_id')
             ->join('tb_people as p', 'tb_users.person_id', 'p.id')
-            ->orderBy('id','DESC')
+            ->orderBy('user_id','DESC')
             ->paginate(5);
         return view('users.index',compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -85,9 +85,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::select('*')
+            ->join('tb_people as p', 'tb_users.person_id', 'p.id')
+            ->join('tb_address as a', 'p.address_id', 'a.id')
+            ->where('tb_users.id', $id)->first();
         $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        $userRole = Role::select('*')
+                ->where('id', $user->role_id)->first();
 
         return view('users.edit',compact('user','roles','userRole'));
     }
