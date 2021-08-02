@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Person;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class PeopleController extends Controller
 {
@@ -60,9 +62,8 @@ class PeopleController extends Controller
      * @param  \App\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function edit(Person $person)
+    public function edit(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -72,9 +73,15 @@ class PeopleController extends Controller
      * @param  \App\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Person $person)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $input = Arr::except($input, '_token');
+
+        Person::whereId($id)->update($input);
+
+        return redirect()->route('users.index')
+            ->with('success','Dados pessoais editados com sucesso');
     }
 
     /**

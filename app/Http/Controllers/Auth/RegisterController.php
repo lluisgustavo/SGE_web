@@ -93,25 +93,25 @@ class RegisterController extends Controller
 
                 $address = Address::create(
                     [
-                        'street' => $request->address_street,
-                        'number' => $request->address_number,
-                        'complement' => $request->address_complement,
-                        'district' => $request->address_district,
-                        'city' => $request->address_city,
-                        'state' => $request->address_state,
-                        'country' => $request->address_country,
-                        'postalcode' => $request->address_postalcode,
-                        'ref' => $request->address_ref
+                        'street' => $request->street,
+                        'number' => $request->number,
+                        'complement' => $request->complement,
+                        'district' => $request->district,
+                        'city' => $request->city,
+                        'state' => $request->state,
+                        'country' => $request->country,
+                        'postalcode' => $request->postalcode,
+                        'ref' => $request->ref
                     ]
                 );
 
                 $person = Person::create(
                     [
-                        'first_name' => $request->person_first_name,
-                        'last_name' => $request->person_last_name,
-                        'cpf' => $request->person_cpf,
-                        'birthday' => $request->person_birthday,
-                        'phone' => $request->person_phone,
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'cpf' => $request->cpf,
+                        'birthday' => $request->birthday,
+                        'phone' => $request->phone,
                     ]
                 );
 

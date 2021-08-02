@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Person;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class AddressController extends Controller
 {
@@ -76,9 +79,15 @@ class AddressController extends Controller
      * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $input = Arr::except($input, '_token');
+
+        Address::whereId($id)->update($input);
+
+        return redirect()->route('users.index')
+            ->with('success','Endereço editados com sucesso');
     }
 
     /**
@@ -89,6 +98,5 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
     }
 }

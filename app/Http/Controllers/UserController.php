@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'password' => 'required|same:confirm-password|min:8',
             'roles' => 'required'
         ]);
 
@@ -89,7 +89,7 @@ class UserController extends Controller
             ->join('tb_people as p', 'tb_users.person_id', 'p.id')
             ->join('tb_address as a', 'p.address_id', 'a.id')
             ->where('tb_users.id', $id)->first();
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::all();
         $userRole = Role::select('*')
                 ->where('id', $user->role_id)->first();
 
@@ -106,22 +106,26 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'password' => 'required|same:password_confirmation|min:8',
+            'role' => 'required'
         ]);
 
         $input = $request->all();
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
+            $input = Arr::except($input, 'password_confirmation');
         }else{
             $input = Arr::except($input,array('password'));
         }
 
-        $user = User::find($id);
-        $user->update($input);
+        $input = Arr::except($input, '_token');
+        $input['role_id'] = $input['role'];
+        $input = Arr::except($input, 'role');
+
+        User::whereId($id)->update($input);
         DB::table('tb_model_has_roles')->where('model_id',$id)->delete();
 
+        $user = User::whereId($id)->first();
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
