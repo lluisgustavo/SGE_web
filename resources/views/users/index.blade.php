@@ -44,14 +44,8 @@
                                     </td>
                                     <td>{{date("d/m/Y H:i:s", strtotime($user->created_at))}}</td>
                                     <td class="text-right">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="{{ URL::to('users/' . $user->user_id . '/edit') }}">Editar</a>
-                                            </div>
-                                        </div>
+                                        <a class="" href="{{ route('user.edit', $user->user_id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a class="" href="{{ route('users.destroy', $user->user_id) }}"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
