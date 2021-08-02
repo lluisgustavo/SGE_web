@@ -21,10 +21,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::select('tb_users.id as user_id', 'tb_users.email', DB::raw('format(tb_users.created_at, "d", "pt-br")'),
-            'tb_users.person_id', 'p.*')
+        $users = User::select('tb_users.id as user_id', 'tb_users.email', 'tb_users.created_at',
+            'tb_users.person_id', 'p.first_name', 'p.last_name', 'p.cpf', 'p.birthday', 'p.phone', 'p.address_id as address_id')
             ->join('tb_people as p', 'tb_users.person_id', 'p.id')
-            ->orderBy('id','DESC')
+            ->orderBy('user_id','DESC')
             ->paginate(5);
         return view('users.index',compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'password' => 'required|same:confirm-password|min:8',
             'roles' => 'required'
         ]);
 
@@ -85,9 +85,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        $user = User::select('*')
+            ->join('tb_people as p', 'tb_users.person_id', 'p.id')
+            ->join('tb_address as a', 'p.address_id', 'a.id')
+            ->where('tb_users.id', $id)->first();
+        $roles = Role::all();
+        $userRole = Role::select('*')
+                ->where('id', $user->role_id)->first();
 
         return view('users.edit',compact('user','roles','userRole'));
     }
@@ -102,22 +106,26 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'password' => 'required|same:password_confirmation|min:8',
+            'role' => 'required'
         ]);
 
         $input = $request->all();
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
+            $input = Arr::except($input, 'password_confirmation');
         }else{
             $input = Arr::except($input,array('password'));
         }
 
-        $user = User::find($id);
-        $user->update($input);
+        $input = Arr::except($input, '_token');
+        $input['role_id'] = $input['role'];
+        $input = Arr::except($input, 'role');
+
+        User::whereId($id)->update($input);
         DB::table('tb_model_has_roles')->where('model_id',$id)->delete();
 
+        $user = User::whereId($id)->first();
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')

@@ -1,20 +1,20 @@
 function limpa_formulário_cep() {
     //Limpa valores do formulário de cep.
-    $('input[name=address_street]').val("")
-    $('input[name=address_district]').val("")
-    $('input[name=address_city]').val("")
-    $('input[name=address_state]').val("")
-    $('input[name=address_country]').val("")
+    $('input[name=street]').val("")
+    $('input[name=district]').val("")
+    $('input[name=city]').val("")
+    $('input[name=state]').val("")
+    $('input[name=country]').val("")
 }
 
 function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
     //Atualiza os campos com os valores.
-    $('input[name=address_street]').val(conteudo.logradouro)
-    $('input[name=address_district]').val(conteudo.bairro)
-    $('input[name=address_city]').val(conteudo.localidade)
-    $('input[name=address_state]').val(conteudo.uf)
-    $('input[name=address_country]').val("Brasil")
+    $('input[name=street]').val(conteudo.logradouro)
+    $('input[name=district]').val(conteudo.bairro)
+    $('input[name=city]').val(conteudo.localidade)
+    $('input[name=state]').val(conteudo.uf)
+    $('input[name=country]').val("Brasil")
     } //end if.
     else {
         //CEP não Encontrado.
@@ -37,11 +37,11 @@ function pesquisacep(valor) {
         if(validacep.test(cep)) {
 
         //Preenche os campos com "..." enquanto consulta webservice.
-        $('input[name=address_street]').val("...")
-        $('input[name=address_district]').val("...")
-        $('input[name=address_city]').val("...")
-        $('input[name=address_state]').val("...")
-        $('input[name=address_country]').val("...")
+        $('input[name=street]').val("...")
+        $('input[name=district]').val("...")
+        $('input[name=city]').val("...")
+        $('input[name=state]').val("...")
+        $('input[name=country]').val("...")
 
         //Cria um elemento javascript.
         var script = document.createElement('script');
@@ -65,7 +65,7 @@ function pesquisacep(valor) {
 };
 
 ValidaCPF = function(element){
-    if($(element).val.trim() == '') return false;
+    if($(element).val().trim() == '') return false;
     var Soma;
     var Resto;
     var CPF = $(element).val().trim();

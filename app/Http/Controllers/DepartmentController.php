@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Person;
-use App\User;
+use App\Subject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
-class PeopleController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,16 +22,11 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return Person::create([
-            'first_name' => $request->address_street,
-            'last_name' => $request->address_number,
-            'cpf' => $request->address_complement,
-            'birthday' => $request->address_district,
-            'phone' => $request->address_city,
-        ]);
+        //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,10 +41,10 @@ class PeopleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function show(Person $person)
+    public function show(Subject $subject)
     {
         //
     }
@@ -59,38 +52,33 @@ class PeopleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Subject $subject)
     {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Person  $person
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Subject $subject)
     {
-        $input = $request->all();
-        $input = Arr::except($input, '_token');
-
-        Person::whereId($id)->update($input);
-
-        return redirect()->route('users.index')
-            ->with('success','Dados pessoais editados com sucesso');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Person $person)
+    public function destroy(Subject $subject)
     {
         //
     }
