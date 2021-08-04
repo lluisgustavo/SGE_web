@@ -14,7 +14,7 @@
 
                             @if(Auth::user()->role_id === 1)
                                 <div class="col-4 text-right">
-                                    <a href="{{ URL::to('users/create') }}" class="btn btn-sm btn-primary">Adicionar Departamento</a>
+                                    <a href="{{ route('departments.create') }}" class="btn btn-sm btn-primary">Adicionar Departamento</a>
                                 </div>
                             @endif
                         </div>
