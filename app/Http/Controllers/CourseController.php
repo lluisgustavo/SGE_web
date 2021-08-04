@@ -12,9 +12,14 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $courses = Course::select('*')
+            ->join('tb_departments as d', 'tb_courses.department_id', 'd.id')
+            ->paginate(5);
+
+        return view('courses.index',compact('courses'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
