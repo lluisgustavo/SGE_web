@@ -16,7 +16,9 @@ This is a web application developed in Laravel for the bilingual technical cours
 ## Project Status <a name="project-status"></a>
 Project is: _in progress_
 
-![10%](https://progress-bar.dev/10)
+![20%](https://progress-bar.dev/20)
+
+<sup><sub>Seguindo os cartões do Trello</sub></sup>
  
 ## Introduction <a name="introduction"></a>
 
