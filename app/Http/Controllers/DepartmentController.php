@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -41,7 +42,20 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nome-departamento' => 'required|email|unique:users,email',
+            'sigla-departamento' => 'required|same:confirm-password|min:8',
+            'email-departamento' => 'required',
+            'telefone-departamento' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        $user = Department::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+            ->with('success','User created successfully');
     }
 
     /**

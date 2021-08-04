@@ -2,9 +2,9 @@
 
 @section('content')
     @include('layouts.headers.normal')
-    <div class="container-fluid mt--7">
-        <div class="row justify-content-center">
-            <div class="card col-md-10 shadow">
+    <div class="container-fluid mt-7">
+        <div class="row">
+            <div class="card col-12 shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
@@ -13,18 +13,17 @@
                         </div>
                     </div>
 
-                    <div class="card-body px-lg-5 py-lg-5">
-                        <div class="row">
+                    <div class="card-body px-lg-5">
                             <div class="col-md-12">
-                                <form role="form" method="POST" action="">
+                                <form role="form" method="POST" action="{{ route('departments.store') }}">
                                 @csrf
 
                                 <!-- Departamento -->
-                                    <div class="text-center mt-4">
+                                    <div class="text-center">
                                         <h2>{{ __('Departamento') }}</h2>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-10 form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                        <div class="col-sm-8 form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <div class="input-group input-group-alternative mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-building"></i></span>
@@ -38,7 +37,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-2 form-group{{ $errors->has('initials') ? ' has-danger' : '' }}">
+                                        <div class="col-sm-4 form-group{{ $errors->has('initials') ? ' has-danger' : '' }}">
                                             <div class="input-group input-group-alternative mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-building"></i></span>
@@ -54,11 +53,11 @@
                                     </div>
 
                                     <!-- Departamento -->
-                                    <div class="text-center mt-2">
+                                    <div class="text-center">
                                         <h2>{{ __('Contato') }}</h2>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-8 form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                        <div class="col-sm-6 col-md-8 form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <div class="input-group input-group-alternative mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
@@ -71,7 +70,7 @@
                                             </span>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                        <div class="col-sm-6 col-md-4 form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                             <div class="input-group input-group-alternative mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
@@ -90,7 +89,6 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
                     </div>
             </div>
         </div>
