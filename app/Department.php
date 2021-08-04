@@ -20,7 +20,7 @@ class Department extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name'
+        'id', 'name', 'initials', 'contact_email', 'contact_phone'
     ];
 
     public function course()

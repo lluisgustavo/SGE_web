@@ -29,17 +29,23 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">Sigla</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Telefone</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($departments as $department)
                                 <tr>
-                                    <td>{{$department->student_id}} </td>
+                                    <td>{{$department->id}} </td>
                                     <td>{{$department->name}}</td>
+                                    <td>{{$department->initials}}</td>
+                                    <td>{{$department->contact_email}}</td>
+                                    <td>{{$department->contact_phone}}</td>
                                     <td class="text-right">
-                                        <a class="" href="{{ route('user.edit', $student->user_id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                        <a class="" href="{{ route('users.destroy', $student->user_id) }}"><i class="fas fa-trash"></i></a>
+                                        <a class="" href="{{ route('user.edit', $department->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a class="" href="{{ route('users.destroy', $department->id) }}"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

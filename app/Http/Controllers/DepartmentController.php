@@ -42,20 +42,19 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nome-departamento' => 'required|email|unique:users,email',
-            'sigla-departamento' => 'required|same:confirm-password|min:8',
-            'email-departamento' => 'required',
-            'telefone-departamento' => 'required'
-        ]);
+        /*$this->validate($request, [
+            'name' => 'required',
+            'initials' => 'required|regex:/^[a-zA-Z]+$/u|max:10',
+            'contact_email-' => 'required|max:100',
+            'contact_phone' => 'required'
+        ]);*/
 
         $input = $request->all();
 
-        $user = Department::create($input);
-        $user->assignRole($request->input('roles'));
+        $department = Department::create($input);
 
-        return redirect()->route('users.index')
-            ->with('success','User created successfully');
+        return redirect()->route('departments.index')
+            ->with('success','Departamento criado.');
     }
 
     /**
