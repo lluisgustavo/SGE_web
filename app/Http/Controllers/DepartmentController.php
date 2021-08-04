@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Subject;
+use App\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -12,9 +12,13 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $departments = Department::select('*')
+            ->paginate(5);
+
+        return view('departments.index',compact('departments'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**

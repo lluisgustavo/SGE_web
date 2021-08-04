@@ -12,9 +12,15 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $students = Student::select('*')
+            ->join('tb_people as p', 'p.id', 'tb_students.person_id')
+            ->join('tb_courses as c', 'c.id', 'tb_students.course_id')
+            ->paginate(5);
+
+        return view('students.index',compact('students'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
