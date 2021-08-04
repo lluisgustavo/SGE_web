@@ -3,6 +3,7 @@
 @section('content')
     @include('layouts.headers.normal')
     <div class="container-fluid mt--7">
+        {{$roles}}
         <div class="row">
             <div class="col">
                 <div class="card shadow">
