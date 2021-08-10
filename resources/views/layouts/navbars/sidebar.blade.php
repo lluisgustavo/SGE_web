@@ -70,27 +70,27 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('students.list') }}">
+                    <a class="nav-link" href="{{ route('students.index') }}">
                         <i class="fas fa-user-graduate"></i> {{ __('Alunos') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('teachers.list') }}">
+                    <a class="nav-link" href="{{ route('teachers.index') }}">
                         <i class="fas fa-chalkboard-teacher"></i> {{ __('Professores') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('subjects.list') }}">
+                    <a class="nav-link" href="{{ route('subjects.index') }}">
                         <i class="fas fa-school"></i> {{ __('Disciplinas') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('courses.list') }}">
+                    <a class="nav-link" href="{{ route('courses.index') }}">
                         <i class="fas fa-university"></i> {{ __('Cursos') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('departments.list') }}">
+                    <a class="nav-link" href="{{ route('departments.index') }}">
                         <i class="fas fa-building"></i> {{ __('Departamentos') }}
                     </a>
                 </li>

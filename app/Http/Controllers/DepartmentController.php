@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class DepartmentController extends Controller
 {
@@ -28,7 +30,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::pluck('name','name')->all();
+        return view('departments.create',compact('roles'));
     }
 
     /**
@@ -39,7 +42,19 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$this->validate($request, [
+            'name' => 'required',
+            'initials' => 'required|regex:/^[a-zA-Z]+$/u|max:10',
+            'contact_email-' => 'required|max:100',
+            'contact_phone' => 'required'
+        ]);*/
+
+        $input = $request->all();
+
+        $department = Department::create($input);
+
+        return redirect()->route('departments.index')
+            ->with('success','Departamento criado.');
     }
 
     /**

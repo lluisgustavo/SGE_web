@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Course extends Model
 {
@@ -18,7 +20,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'hourly_load'
+        'id', 'name', 'hourly_load', 'department_id'
     ];
 
     public function department()

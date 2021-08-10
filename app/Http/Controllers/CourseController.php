@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Department;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Spatie\Permission\Models\Role;
+use DB;
 
 class CourseController extends Controller
 {
@@ -14,7 +19,7 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $courses = Course::select('*')
+        $courses = Course::select('tb_courses.*', 'd.name as department_name')
             ->join('tb_departments as d', 'tb_courses.department_id', 'd.id')
             ->paginate(5);
 
@@ -29,7 +34,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::select('*')
+                ->get();
+        return view('courses.create',compact('departments'));
     }
 
     /**
@@ -40,7 +47,12 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $course = Course::create($input);
+
+        return redirect()->route('courses.index')
+            ->with('success','Curso criado.');
     }
 
     /**
@@ -60,9 +72,16 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
-        //
+        $course = Course::select('*')
+            ->where('tb_courses.id', $id)
+            ->first();
+
+        $departments = Department::select('*')
+            ->get();
+
+        return view('courses.edit',compact('course', 'departments'));
     }
 
     /**
@@ -72,9 +91,22 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'department_id' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input = Arr::except($input, '_token');
+
+        Course::whereId($id)->update($input);
+
+        $user = User::whereId($id)->first();
+
+        return redirect()->route('courses.index')
+            ->with('success','Curso editado com sucesso');
     }
 
     /**
@@ -83,8 +115,10 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy($id)
     {
-        //
+        Course::find($id)->delete();
+        return redirect()->route('courses.index')
+            ->with('success','Curso deletado com sucesso');
     }
 }
