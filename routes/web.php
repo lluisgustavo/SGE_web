@@ -39,16 +39,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-student', 'StudentController@store')->name('students.store');
 
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
-    Route::get('/create-teacher', 'TeacherController@create')->name('teachers.create');
-    Route::post('/update-teachers', 'TeacherController@update')->name('teachers.update');
-    Route::post('/delete-teachers', 'TeacherController@destroy')->name('teachers.destroy');
-    Route::post('/store-teacher', 'TeacherController@store')->name('teachers.store');
+    Route::get('/teachers/create', 'TeacherController@create')->name('teachers.create');
+    Route::post('/teachers/edit/{id}', 'TeacherController@edit')->name('teachers.edit');
+    Route::post('/teachers/update/{id}', 'TeacherController@update')->name('teachers.update');
+    Route::post('/teachers/delete/{id}', 'TeacherController@destroy')->name('teachers.destroy');
+    Route::post('/teachers/store', 'TeacherController@store')->name('teachers.store');
 
     Route::get('/subjects', 'SubjectController@index')->name('subjects.index');
-    Route::get('/create-subject', 'SubjectController@create')->name('subjects.create');
-    Route::post('/update-subjects', 'SubjectController@update')->name('subjects.update');
-    Route::post('/delete-subjects', 'SubjectController@destroy')->name('subjects.destroy');
-    Route::post('/store-subject', 'SubjectController@store')->name('students.store');
+    Route::get('/subjects/create', 'SubjectController@create')->name('subjects.create');
+    Route::post('/subjects/edit/{id}', 'SubjectController@edit')->name('subjects.edit');
+    Route::post('/subjects/update/{id}', 'SubjectController@update')->name('subjects.update');
+    Route::post('/subjects/delete/{id}', 'SubjectController@destroy')->name('subjects.destroy');
+    Route::post('/subjects/store', 'SubjectController@store')->name('students.store');
 
     Route::get('/courses', 'CourseController@index')->name('courses.index');
     Route::get('/courses/create', 'CourseController@create')->name('courses.create');
