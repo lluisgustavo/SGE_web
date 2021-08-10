@@ -8,19 +8,19 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Adicionar Curso</h3>
+                                <h3 class="mb-0">Adicionar Disciplina</h3>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-body px-lg-5">
                             <div class="col-md-12">
-                                <form role="form" method="POST" action="{{ route('courses.store') }}">
+                                <form role="form" method="POST" action="{{ route('subjects.store') }}">
                                 @csrf
 
                                 <!-- Curso -->
                                     <div class="text-center">
-                                        <h2>{{ __('Curso') }}</h2>
+                                        <h2>{{ __('Disciplina') }}</h2>
                                     </div>
                                     <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
                                         <div class="input-group input-group-alternative mb-3">
