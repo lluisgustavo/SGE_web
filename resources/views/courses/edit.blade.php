@@ -19,7 +19,7 @@
 
                     <div class="card-body px-lg-5 py-lg-5">
                         <!-- Curso -->
-                        <form role="form" method="POST" action="{{ route('courses.edit', $course->id) }}">
+                        <form role="form" method="POST" action="{{ route('courses.update', $course->id) }}">
                             @csrf
 
                             <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
