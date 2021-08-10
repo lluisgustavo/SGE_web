@@ -9,12 +9,12 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Usuários</h3>
+                                <h3 class="mb-0">Cursos</h3>
                             </div>
 
                             @if(Auth::user()->role_id === 1)
                                 <div class="col-4 text-right">
-                                    <a href="{{ URL::to('users/create') }}" class="btn btn-sm btn-primary">Adicionar Usuário</a>
+                                    <a href="{{ URL::to('users/create') }}" class="btn btn-sm btn-primary">Adicionar Curso</a>
                                 </div>
                             @endif
                         </div>
@@ -29,26 +29,28 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Curso</th>
+                                    <th scope="col">Carga Horária</th>
+                                    <th scope="col">Departamento</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($students as $student)
+                                @foreach($courses as $course)
                                 <tr>
-                                    <td>{{$student->student_id}} </td>
-                                    <td>{{$student->first_name}} {{$student->last_name}} </td>
-                                    <td>{{date("d/m/Y H:i:s", strtotime($student->created_at))}}</td>
+                                    <td>{{$course->id}} </td>
+                                    <td>{{$course->name}} </td>
+                                    <td>{{$course->hourly_load}} </td>
+                                    <td>{{$course->department_name}} </td>
                                     <td class="text-right">
-                                        <a class="" href="{{ route('user.edit', $student->user_id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                        <a class="" href="{{ route('users.destroy', $student->user_id) }}"><i class="fas fa-trash"></i></a>
+                                        <a class="" href="{{ route('user.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a class="" href="{{ route('users.destroy', $course->id) }}"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
 
-                        <div class="d-flex justify-content-center">{{ $users->links() }}</div>
+                        <div class="d-flex justify-content-center">{{ $courses->links() }}</div>
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
