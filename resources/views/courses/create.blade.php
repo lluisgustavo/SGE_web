@@ -18,7 +18,7 @@
                                 <form role="form" method="POST" action="{{ route('courses.store') }}">
                                 @csrf
 
-                                <!-- Departamento -->
+                                <!-- Curso -->
                                     <div class="text-center">
                                         <h2>{{ __('Curso') }}</h2>
                                     </div>
