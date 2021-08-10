@@ -45,7 +45,13 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        dd($request, $input);
+
+        $subject = Subject::create($input);
+
+        return redirect()->route('subjects.index')
+            ->with('success','Disciplina criado.');
     }
 
     /**

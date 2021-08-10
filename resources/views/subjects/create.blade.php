@@ -41,7 +41,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                                 </div>
-                                                <input class="form-control{{ $errors->has('subject') ? ' is-invalid' : '' }}" placeholder="{{ __('Carga horária') }}" type="number" name="name" value="" required>
+                                                <input class="form-control{{ $errors->has('subject') ? ' is-invalid' : '' }}" placeholder="{{ __('Carga horária') }}" type="number" name="hourly_load" value="" required>
                                             </div>
                                             @if ($errors->has('subject'))
                                                 <span class="invalid-feedback" style="display: block;" role="alert">
