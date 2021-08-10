@@ -14,7 +14,7 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $courses = Course::select('*')
+        $courses = Course::select('tb_courses.*', 'd.name as department_name')
             ->join('tb_departments as d', 'tb_courses.department_id', 'd.id')
             ->paginate(5);
 
