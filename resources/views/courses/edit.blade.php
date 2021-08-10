@@ -9,7 +9,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Editar Usuário</h3>
+                                <h3 class="mb-0">Editar Cursos</h3>
                             </div>
                         </div>
                     </div>
@@ -22,63 +22,40 @@
                             <div class="col-md-6">
                                 <!-- Dados Pessoais -->
                                 <div class="text-center mt-4">
-                                    <h2>{{ __('Conta') }}</h2>
+                                    <h2>{{ __('Curso') }}</h2>
                                 </div>
-                                <form role="form" method="POST" action="{{ route('users.edit.user', $user->user_id) }}">
+
+                                <form role="form" method="POST" action="{{ route('courses.edit', $department->id) }}">
                                 @csrf
 
-                                <!-- Usuário -->
-                                    <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                <!-- Curso -->
+                                    <div class="text-center">
+                                        <h2>{{ __('Curso') }}</h2>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
                                         <div class="input-group input-group-alternative mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                <span class="input-group-text"><i class="fas fa-sticky-note"></i></span>
                                             </div>
-                                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" disabled name="email" value="{{ $user->email }}" required>
+                                            <input class="form-control{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome do Curso') }}" type="text" name="name" value="" required>
                                         </div>
-                                        @if ($errors->has('email'))
+                                        @if ($errors->has('course'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>{{ $errors->first('course') }}</strong>
                                         </span>
                                         @endif
                                     </div>
-                                    <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                            </div>
-                                            <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Senha') }}" type="password" name="password" required>
-                                        </div>
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="{{ __('Confirmar Senha') }}" type="password" name="password_confirmation" required>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <select class="browser-default custom-select" name="role" required>
-                                                @foreach($roles as $role)
-                                                    <option value="{{$role->id}}" {{($user->role_id == $role->id) ? "selected" : ''}}>
-                                                        @if($role->name == 'admin')
-                                                            Administrador
-                                                        @elseif($role->name == 'student')
-                                                            Estudante
-                                                        @elseif($role->name == 'employee')
-                                                            Colaborador
-                                                        @elseif($role->name == 'teacher')
-                                                            Professor
-                                                        @endif
+                                            <select class="browser-default custom-select" name="department_id" required>
+                                                <option>Selecione um Departamento</option>
+                                                @foreach($departments as $department)
+                                                    <option value="{{$department->id}}">
+                                                        {{ $department->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -86,7 +63,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary mt-4">{{ __('Editar Conta') }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('Criar Novo Curso') }}</button>
                                     </div>
                                 </form>
                             </div>
