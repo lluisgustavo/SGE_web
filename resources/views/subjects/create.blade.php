@@ -55,7 +55,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <select multiple="multiple" class="browser-default custom-select" name="course_id" required>
+                                            <select multiple="multiple" class="browser-default custom-select" name="courses[]" required>
                                                 <option>Selecione os Cursos</option>
                                                 @foreach($courses as $course)
                                                     <option value="{{$course->id}}">
