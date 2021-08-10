@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">{{ __('Criar Novo Curso') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Editar Curso') }}</button>
                             </div>
                         </form>
                     </div>
