@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Department;
+use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -70,9 +71,16 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
-        //
+        $course = Course::select('*')
+            ->where('tb_courses.id', $id)
+            ->first();
+
+        $departments = Department::select('*')
+            ->get();
+
+        return view('courses.edit',compact('course', 'departments'));
     }
 
     /**
