@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Department;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -30,8 +31,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('courses.create',compact('roles'));
+        $departments = Department::select('*')
+                ->get();
+        return view('courses.create',compact('departments'));
     }
 
     /**
