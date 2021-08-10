@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Subject;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,15 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $subjects = Subject::select('*')
+            ->join('tb_subject_course as sc', 'tb_subjects.id', 'sc.subject_id')
+            ->join('tb_courses as c', 'c.id', 'sc.course_id')
+            ->paginate(5);
+
+        return view('subjects.index',compact('subjects'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
