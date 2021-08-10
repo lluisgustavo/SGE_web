@@ -6,6 +6,7 @@ use App\Course;
 use App\Department;
 use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class SubjectController extends Controller
 {
@@ -46,12 +47,20 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        dd($request, $input);
+        $courses = $input['courses'];
+        $input['syllabus'] = '';
+        $input = Arr::except($input,array('courses'));
 
         $subject = Subject::create($input);
+        foreach($courses as $course_id){
+            $subject_course['subject_id'] = $subject->id;
+            $subject_course['course_id'] = $course_id;
+            dd($request, $subject_course);
+            $subject = Subject::create($subject_course);
+        }
 
         return redirect()->route('subjects.index')
-            ->with('success','Disciplina criado.');
+            ->with('success','Disciplina criada.');
     }
 
     /**
