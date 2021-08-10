@@ -42,8 +42,16 @@
                                     <td>{{($course->hourly_load ? $course->hourly_load . 'h' : '00h')}} </td>
                                     <td>{{$course->department_name}} </td>
                                     <td class="text-right">
-                                        <a class="" href="{{ route('courses.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                        <a class="" href="{{ route('courses.destroy', $course->id) }}"><i class="fas fa-trash"></i></a>
+                                        <div class="row">
+                                            <a class="" href="{{ route('courses.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:void(0);" onclick="$(this).find('form').submit();" style="margin-left: 0.2em;">
+                                                <i class="fas fa-trash"></i>
+                                                <form style="display: none" action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
