@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/subjects/edit/{id}', 'SubjectController@edit')->name('subjects.edit');
     Route::post('/subjects/update/{id}', 'SubjectController@update')->name('subjects.update');
     Route::post('/subjects/delete/{id}', 'SubjectController@destroy')->name('subjects.destroy');
-    Route::post('/subjects/store', 'SubjectController@store')->name('students.store');
+    Route::post('/subjects/store', 'SubjectController@store')->name('subjects.store');
 
     Route::get('/courses', 'CourseController@index')->name('courses.index');
     Route::get('/courses/create', 'CourseController@create')->name('courses.create');
