@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Department;
 use App\Subject;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::select('*')
+            ->get();
+        return view('courses.create',compact('courses'));
     }
 
     /**
