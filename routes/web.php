@@ -51,17 +51,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-subject', 'SubjectController@store')->name('students.store');
 
     Route::get('/courses', 'CourseController@index')->name('courses.index');
-    Route::get('/create-course', 'CourseController@create')->name('courses.create');
-    Route::get('/edit-course/{id}', 'CourseController@edit')->name('courses.edit');
-    Route::post('/update-course/{id}', 'CourseController@update')->name('courses.update');
-    Route::post('/delete-course/{id}', 'CourseController@destroy')->name('courses.destroy');
-    Route::post('/store-course', 'CourseController@store')->name('courses.store');
+    Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+    Route::get('/courses/edit/{id}', 'CourseController@edit')->name('courses.edit');
+    Route::post('/courses/update/{id}', 'CourseController@update')->name('courses.update');
+    Route::delete('/courses/delete/{id}', 'CourseController@destroy')->name('courses.destroy');
+    Route::post('/courses/store', 'CourseController@store')->name('courses.store');
 
     Route::get('/departments', 'DepartmentController@index')->name('departments.index');
     Route::get('/create-department', 'DepartmentController@create')->name('departments.create');
     Route::get('/edit-department/{id}', 'DepartmentController@edit')->name('departments.edit');
     Route::post('/update-department/{id}', 'DepartmentController@update')->name('departments.update');
-    Route::post('/delete-department/{id}', 'DepartmentController@destroy')->name('departments.destroy');
+    Route::delete('/delete-department/{id}', 'DepartmentController@destroy')->name('departments.destroy');
     Route::post('/store-department', 'DepartmentController@store')->name('departments.store');
 
     Route::resource('roles', RoleController::class);
