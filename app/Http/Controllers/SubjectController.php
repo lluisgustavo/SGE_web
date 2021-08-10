@@ -34,7 +34,7 @@ class SubjectController extends Controller
     {
         $courses = Course::select('*')
             ->get();
-        return view('courses.create',compact('courses'));
+        return view('subjects.create',compact('courses'));
     }
 
     /**
