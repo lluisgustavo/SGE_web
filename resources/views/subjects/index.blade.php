@@ -9,7 +9,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Cursos</h3>
+                                <h3 class="mb-0">Disciplinas</h3>
                             </div>
 
                             @if(Auth::user()->role_id === 1)
