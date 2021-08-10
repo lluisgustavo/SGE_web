@@ -1,7 +1,7 @@
 # :school_satchel: Web Application - School Management System  :school_satchel: <a name="top"></a>
 
 This is a web application developed in Laravel for the bilingual technical course of analysis and development systems of SENAI. 
-> Live demo [_here_](https://www.luisdesouza.com.br/sge).
+> Live demo [_here_](https://www.luisdesouza.com.br/sge). (no demo yet)
 
 ## Table of Contents
 * [Project Status](#project-status)
