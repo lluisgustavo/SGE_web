@@ -6,6 +6,7 @@ use App\Course;
 use App\Department;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Role;
 use DB;
 
@@ -90,9 +91,22 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'department_id' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input = Arr::except($input, '_token');
+
+        Course::whereId($id)->update($input);
+
+        $user = User::whereId($id)->first();
+
+        return redirect()->route('courses.index')
+            ->with('success','Curso editado com sucesso');
     }
 
     /**
