@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/create-course', 'CourseController@create')->name('courses.create');
     Route::get('/edit-course/{id}', 'CourseController@edit')->name('courses.edit');
     Route::post('/update-course/{id}', 'CourseController@update')->name('courses.update');
-    Route::post('/delete-course/{id}', 'CourseController@delete')->name('courses.destroyg');
+    Route::post('/delete-course/{id}', 'CourseController@delete')->name('courses.destroy');
     Route::post('/store-course', 'CourseController@store')->name('courses.store');
 
     Route::get('/departments', 'DepartmentController@index')->name('departments.index');
