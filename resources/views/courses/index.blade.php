@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{{$course->id}} </td>
                                     <td>{{$course->name}} </td>
-                                    <td>{{$course->hourly_load}} </td>
+                                    <td>{{($course->hourly_load ? $course->hourly_load . 'h' : '00h')}} </td>
                                     <td>{{$course->department_name}} </td>
                                     <td class="text-right">
                                         <a class="" href="{{ route('user.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
