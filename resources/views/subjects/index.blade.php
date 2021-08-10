@@ -30,7 +30,7 @@
                                     <th scope="col">Id</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Carga Horária</th>
-                                    <th scope="col">Cursos</th>
+                                    <th scope="col">Curso</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -40,6 +40,7 @@
                                     <td>{{$subject->id}} </td>
                                     <td>{{$subject->name}} </td>
                                     <td>{{($subject->hourly_load ? $subject->hourly_load . 'h' : '00h')}} </td>
+                                    <td>{{$subject->courses}} </td>
                                     <td class="text-right">
                                         <div class="row">
                                             <a class="" href="{{ route('subjects.edit', $subject->id) }}"><i class="fas fa-pencil-alt"></i></a>
