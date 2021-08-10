@@ -52,14 +52,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/courses', 'CourseController@index')->name('courses.index');
     Route::get('/create-course', 'CourseController@create')->name('courses.create');
-    Route::post('/update-courses', 'CourseController@update')->name('courses.update');
-    Route::post('/delete-courses', 'CourseController@delete')->name('courses.delete');
+    Route::post('/edit-course/{id}', 'CourseController@update')->name('courses.edit');
+    Route::post('/edit-course/{id}', 'CourseController@delete')->name('courses.delete');
     Route::post('/store-course', 'CourseController@store')->name('courses.store');
 
     Route::get('/departments', 'DepartmentController@index')->name('departments.index');
     Route::get('/create-department', 'DepartmentController@create')->name('departments.create');
-    Route::post('/update-departments', 'DepartmentController@update')->name('departments.update');
-    Route::post('/delete-departments', 'DepartmentController@delete')->name('departments.delete');
+    Route::post('/edit-department/{id}', 'DepartmentController@update')->name('courses.edit');
+    Route::post('/edit-department/{id}', 'DepartmentController@delete')->name('courses.delete');
     Route::post('/store-department', 'DepartmentController@store')->name('departments.store');
 
     Route::resource('roles', RoleController::class);
