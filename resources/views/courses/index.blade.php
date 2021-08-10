@@ -42,8 +42,8 @@
                                     <td>{{($course->hourly_load ? $course->hourly_load . 'h' : '00h')}} </td>
                                     <td>{{$course->department_name}} </td>
                                     <td class="text-right">
-                                        <a class="" href="{{ route('user.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
-                                        <a class="" href="{{ route('users.destroy', $course->id) }}"><i class="fas fa-trash"></i></a>
+                                        <a class="" href="{{ route('course.edit', $course->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                        <a class="" href="{{ route('course.destroy', $course->id) }}"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
