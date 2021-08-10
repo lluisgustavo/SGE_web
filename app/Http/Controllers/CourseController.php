@@ -6,6 +6,7 @@ use App\Course;
 use App\Department;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use DB;
 
 class CourseController extends Controller
 {
@@ -44,7 +45,12 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $course = Course::create($input);
+
+        return redirect()->route('courses.index')
+            ->with('success','Curso criado.');
     }
 
     /**

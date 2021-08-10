@@ -20,7 +20,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'hourly_load'
+        'id', 'name', 'hourly_load', 'department_id'
     ];
 
     public function department()
