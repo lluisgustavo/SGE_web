@@ -22,30 +22,44 @@
                                     <div class="text-center">
                                         <h2>{{ __('Disciplina') }}</h2>
                                     </div>
-                                    <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
-                                        <div class="input-group input-group-alternative mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-sticky-note"></i></span>
+                                    <div class="row">
+                                        <div class="col-md-10 form-group{{ $errors->has('subject') ? ' has-danger' : '' }}">
+                                            <div class="input-group input-group-alternative mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-sticky-note"></i></span>
+                                                </div>
+                                                <input class="form-control{{ $errors->has('subject') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome da Disciplina') }}" type="text" name="name" value="" required>
                                             </div>
-                                            <input class="form-control{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome do Curso') }}" type="text" name="name" value="" required>
+                                            @if ($errors->has('subject'))
+                                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('subject') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
-                                        @if ($errors->has('course'))
-                                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('course') }}</strong>
-                                        </span>
-                                        @endif
+                                        <div class="col-md-2 form-group{{ $errors->has('subject') ? ' has-danger' : '' }}">
+                                            <div class="input-group input-group-alternative mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                                </div>
+                                                <input class="form-control{{ $errors->has('subject') ? ' is-invalid' : '' }}" placeholder="{{ __('Carga horária') }}" type="number" name="name" value="" required>
+                                            </div>
+                                            @if ($errors->has('subject'))
+                                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('subject') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <select class="browser-default custom-select" name="department_id" required>
-                                                <option>Selecione um Departamento</option>
-                                                @foreach($departments as $department)
-                                                    <option value="{{$department->id}}">
-                                                        {{ $department->name }}
+                                            <select multiple="multiple" class="browser-default custom-select" name="course_id" required>
+                                                <option>Selecione os Cursos</option>
+                                                @foreach($courses as $course)
+                                                    <option value="{{$course->id}}">
+                                                        {{ $course->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -53,7 +67,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">{{ __('Criar Novo Curso') }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('Criar Nova Disciplina') }}</button>
                                     </div>
                                 </form>
                             </div>
