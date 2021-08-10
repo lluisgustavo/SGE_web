@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\Department;
 use App\Subject;
+use App\SubjectCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use DB;
 
 class SubjectController extends Controller
 {
@@ -17,9 +18,10 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $subjects = Subject::select('*')
+        $subjects = Subject::select('tb_subjects.*', DB::raw('group_concat(c.name SEPARATOR ", ") as courses'))
             ->join('tb_subject_course as sc', 'tb_subjects.id', 'sc.subject_id')
             ->join('tb_courses as c', 'c.id', 'sc.course_id')
+            ->groupBy('tb_subjects.id')
             ->paginate(5);
 
         return view('subjects.index',compact('subjects'))
@@ -52,11 +54,12 @@ class SubjectController extends Controller
         $input = Arr::except($input,array('courses'));
 
         $subject = Subject::create($input);
+        $subject_id = $subject->id;
+
         foreach($courses as $course_id){
-            $subject_course['subject_id'] = $subject->id;
-            $subject_course['course_id'] = $course_id;
-            dd($request, $subject_course);
-            $subject = Subject::create($subject_course);
+            $subject_course['subject_id'] = (int) $subject_id;
+            $subject_course['course_id'] = (int) $course_id;
+            $subject = SubjectCourse::create($subject_course);
         }
 
         return redirect()->route('subjects.index')
