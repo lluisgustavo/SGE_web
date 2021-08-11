@@ -18,10 +18,9 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $subjects = Subject::select('tb_subjects.*', DB::raw('group_concat(c.name SEPARATOR ", ") as courses'))
+        $subjects = Subject::select('tb_subjects.*', 'c.name as course_name')
             ->join('tb_subject_course as sc', 'tb_subjects.id', 'sc.subject_id')
             ->join('tb_courses as c', 'c.id', 'sc.course_id')
-            ->groupBy('tb_subjects.id')
             ->paginate(5);
 
         return view('subjects.index',compact('subjects'))
@@ -112,8 +111,28 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        Subject::find($id)->delete();
+        $subjectCourse = SubjectCourse::select('tb_subject_course.course_id')
+            ->where('subject_id', $id)->first();
+
+        $subject = Subject::select('tb_subjects.hourly_load')
+            ->where('tb_subjects.id', $id)->first();
+
+        $course = Course::select('tb_courses.hourly_load')->where('id', $subjectCourse->course_id)->first();
+        $newHourlyLoad = (int) $course->hourly_load - (int) $subject->hourly_load;
+
+        Course::whereId($subjectCourse->course_id)->update(array('hourly_load' => $newHourlyLoad));
+
+        SubjectCourse::where('subject_id', $id)
+                ->where('course_id', $subjectCourse->course_id)->delete();
+
+        $subjectCourseLeft = SubjectCourse::select(DB::raw('COUNT(*)'))
+                ->where('subject_id', $id)->get();
+
+        if(!$subjectCourseLeft) {
+            Subject::find($id)->delete();
+        }
+
         return redirect()->route('subjects.index')
-            ->with('success','Disciplina deletada com sucesso');
+            ->with('success','Disciplina ' . $subject->name . ' do curso ' . $course->name . ' deletada com sucesso');
     }
 }
