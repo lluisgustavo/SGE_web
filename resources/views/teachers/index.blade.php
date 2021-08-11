@@ -14,7 +14,7 @@
 
                             @if(Auth::user()->role_id === 1)
                                 <div class="col-4 text-right">
-                                    <a href="{{ route('subjects.create')  }}" class="btn btn-sm btn-primary">Adicionar Disciplina</a>
+                                    <a href="{{ route('teachers.create')  }}" class="btn btn-sm btn-primary">Tornar Professor</a>
                                 </div>
                             @endif
                         </div>
@@ -29,24 +29,22 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Carga Horária</th>
-                                    <th scope="col">Curso</th>
+                                    <th scope="col">Departamento</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($subjects as $subject)
+                                @foreach($teachers as $teacher)
                                 <tr>
-                                    <td>{{$subject->id}} </td>
-                                    <td>{{$subject->name}} </td>
-                                    <td>{{($subject->hourly_load ? $subject->hourly_load . 'h' : '00h')}} </td>
-                                    <td>{{$subject->course_name}} </td>
+                                    <td>{{$teachers->id}} </td>
+                                    <td>{{$teachers->name}} </td>
+                                    <td>{{$teachers->department_name }} </td>
                                     <td class="text-right">
                                         <div class="row">
-                                            <a class="" href="{{ route('subjects.edit', $subject->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                            <a class="" href="{{ route('subjects.edit', $teachers->id) }}"><i class="fas fa-pencil-alt"></i></a>
                                             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" style="margin-left: 0.2em;">
                                                 <i class="fas fa-trash"></i>
-                                                <form style="display: none" action="{{ route('subjects.destroy', $subject->id) }}" method="POST">
+                                                <form style="display: none" action="{{ route('subjects.destroy', $teachers->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
@@ -58,7 +56,7 @@
                             </tbody>
                         </table>
 
-                        <div class="d-flex justify-content-center">{{ $subjects->links() }}</div>
+                        <div class="d-flex justify-content-center">{{ $teachers->links() }}</div>
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
