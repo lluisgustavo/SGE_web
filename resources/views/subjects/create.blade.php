@@ -18,7 +18,7 @@
                                 <form role="form" method="POST" action="{{ route('subjects.store') }}">
                                 @csrf
 
-                                <!-- Curso -->
+                                <!-- Disciplina -->
                                     <div class="text-center">
                                         <h2>{{ __('Disciplina') }}</h2>
                                     </div>
@@ -70,6 +70,7 @@
                                         <button type="submit" class="btn btn-primary">{{ __('Criar Nova Disciplina') }}</button>
                                     </div>
                                 </form>
+
                             </div>
                     </div>
             </div>
