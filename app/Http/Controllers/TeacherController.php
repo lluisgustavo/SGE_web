@@ -18,7 +18,7 @@ class TeacherController extends Controller
         $teachers = Teacher::select('*')
             ->paginate(5);
 
-        return view('subjects.index',compact('teachers'))
+        return view('teachers.index',compact('teachers'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
