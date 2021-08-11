@@ -59,7 +59,11 @@ class SubjectController extends Controller
         foreach($courses as $course_id){
             $subject_course['subject_id'] = (int) $subject_id;
             $subject_course['course_id'] = (int) $course_id;
-            $subject = SubjectCourse::create($subject_course);
+            $subject_courses = SubjectCourse::create($subject_course);
+
+            $course = Course::select('*')->where('id', $course_id)->first();
+            $newHourlyLoad = (int) $course->hourly_load + (int) $subject->hourly_load;
+            Course::whereId($course_id)->update(array('hourly_load' => $newHourlyLoad));
         }
 
         return redirect()->route('subjects.index')
@@ -106,8 +110,10 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function destroy($id)
     {
-        //
+        Subject::find($id)->delete();
+        return redirect()->route('subjects.index')
+            ->with('success','Disciplina deletada com sucesso');
     }
 }
