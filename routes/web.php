@@ -33,10 +33,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
     Route::get('/students', 'StudentController@index')->name('students.index');
-    Route::get('/create-student', 'StudentController@create')->name('students.create');
-    Route::post('/update-students', 'StudentController@update')->name('students.update');
-    Route::post('/delete-students', 'StudentController@destroy')->name('students.destroy');
-    Route::post('/store-student', 'StudentController@store')->name('students.store');
+    Route::get('/students/create', 'StudentController@create')->name('students.create');
+    Route::post('/students/edit/{id}', 'StudentController@edit')->name('students.edit');
+    Route::post('/students/update/{id}', 'StudentController@update')->name('students.update');
+    Route::delete('/students/delete/{id}', 'StudentController@destroy')->name('students.destroy');
+    Route::post('/students/store', 'StudentController@store')->name('students.store');
 
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
     Route::get('/teachers/create', 'TeacherController@create')->name('teachers.create');
