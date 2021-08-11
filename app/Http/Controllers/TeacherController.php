@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,13 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $teachers = Teacher::select('*')
+            ->paginate(5);
+
+        return view('subjects.index',compact('teachers'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
