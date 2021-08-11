@@ -18,7 +18,7 @@ Project is: _in progress_
 
 ![20%](https://progress-bar.dev/32)
 
-<sup><sub>Seguindo os cartões do Trello</sub></sup>
+<sup><sub>Percentage made from counting Trello's cards</sub></sup>
  
 ## Introduction <a name="introduction"></a>
 
