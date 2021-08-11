@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Subject extends Model
+class SubjectCourse extends Model
 {
     use Notifiable;
     use HasRoles;
 
-    protected $table = "tb_subjects";
-    protected $primaryKey = "id";
+    protected $table = "tb_subject_course";
+    protected $primaryKey = ['subject_id', 'course_id'];
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -20,11 +21,16 @@ class Subject extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'hourly_load', 'syllabus', 'teacher_id'
+        'subject_id', 'course_id'
     ];
 
     public function course()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasOne(Course::class);
+    }
+
+    public function subject()
+    {
+        return $this->hasOne(Subject::class);
     }
 }
