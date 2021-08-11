@@ -41,14 +41,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
     Route::get('/teachers/create', 'TeacherController@create')->name('teachers.create');
-    Route::post('/teachers/edit/{id}', 'TeacherController@edit')->name('teachers.edit');
+    Route::get('/teachers/edit/{id}', 'TeacherController@edit')->name('teachers.edit');
     Route::post('/teachers/update/{id}', 'TeacherController@update')->name('teachers.update');
     Route::post('/teachers/delete/{id}', 'TeacherController@destroy')->name('teachers.destroy');
     Route::post('/teachers/store', 'TeacherController@store')->name('teachers.store');
 
     Route::get('/subjects', 'SubjectController@index')->name('subjects.index');
     Route::get('/subjects/create', 'SubjectController@create')->name('subjects.create');
-    Route::post('/subjects/edit/{id}', 'SubjectController@edit')->name('subjects.edit');
+    Route::get('/subjects/edit/{id}', 'SubjectController@edit')->name('subjects.edit');
     Route::post('/subjects/update/{id}', 'SubjectController@update')->name('subjects.update');
     Route::delete('/subjects/delete/{id}', 'SubjectController@destroy')->name('subjects.destroy');
     Route::post('/subjects/store', 'SubjectController@store')->name('subjects.store');
@@ -61,11 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/courses/store', 'CourseController@store')->name('courses.store');
 
     Route::get('/departments', 'DepartmentController@index')->name('departments.index');
-    Route::get('/create-department', 'DepartmentController@create')->name('departments.create');
-    Route::get('/edit-department/{id}', 'DepartmentController@edit')->name('departments.edit');
-    Route::post('/update-department/{id}', 'DepartmentController@update')->name('departments.update');
-    Route::delete('/delete-department/{id}', 'DepartmentController@destroy')->name('departments.destroy');
-    Route::post('/store-department', 'DepartmentController@store')->name('departments.store');
+    Route::get('/departments/create', 'DepartmentController@create')->name('departments.create');
+    Route::get('/departments/edit/{id}', 'DepartmentController@edit')->name('departments.edit');
+    Route::post('/departments/update/{id}', 'DepartmentController@update')->name('departments.update');
+    Route::delete('/departments/delete/{id}', 'DepartmentController@destroy')->name('departments.destroy');
+    Route::post('/departments/store', 'DepartmentController@store')->name('departments.store');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
