@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Subject;
 use App\SubjectCourse;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use DB;
@@ -86,9 +87,19 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
+    public function edit($id)
     {
-        //
+        $subject = Subject::select('*')
+            ->where('tb_subjects.id', $id)
+            ->first();
+
+        $courses = Course::select('*')
+            ->get();
+
+        $subject_courses = SubjectCourse::select('*')
+                ->where('tb_subject_course.subject_id', $subject->id)->get();
+
+        return view('subjects.edit',compact('subject', 'courses', 'subject_courses'));
     }
 
     /**
@@ -98,9 +109,67 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'hourly_load' => 'required',
+            'courses' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input = Arr::except($input, '_token');
+
+        $subject = Subject::select('*')->whereId($id)->first();
+
+        $subjectCourses = SubjectCourse::select(DB::raw('GROUP_CONCAT(tb_subject_course.course_id SEPARATOR ", ") AS courses'))
+            ->where('tb_subject_course.subject_id', $id)
+            ->first()->courses;
+
+        $subjectCourses = explode(', ', $subjectCourses);
+
+        foreach($input['courses'] as $course){
+            //Se não existir essa relação entre esta disciplina neste curso, criar relação
+            $subjectCourse = SubjectCourse::select('*')
+                ->where('tb_subject_course.subject_id', $id)
+                ->where('tb_subject_course.course_id', $course)
+                ->first();
+
+            if(!isset($subjectCourse)){
+                $subject_course['subject_id'] = (int) $id;
+                $subject_course['course_id'] = (int) $course;
+                SubjectCourse::create($subject_course);
+
+                $course = Course::select('*')->where('id', $course)->first();
+                $newHourlyLoad = (int) $course->hourly_load + (int) $subject->hourly_load;
+                Course::whereId($course_id)->update(array('hourly_load' => $newHourlyLoad));
+            }
+
+            dd(isset($subjectCourse), !in_array($course, $subjectCourses));
+            //Caso exista essa relação entre esta disciplina neste curso, mas foi retirada, deletar relação
+            if(isset($subjectCourse) && !in_array($course, $subjectCourses)){
+                $subject = Subject::select('tb_subjects.hourly_load')
+                    ->where('tb_subjects.id', $id)->first();
+
+                /*$subjectCourse = SubjectCourse::where('tb_subject_courses.subject_id', $id)
+                    ->where('tb_subject_course.course_id', $course)->delete();*/
+
+                $courseHourlyLoad = Course::select('tb_courses.hourly_load')->where('id', $course)->first();
+                $newHourlyLoad = (int) $courseHourlyLoad->hourly_load - (int) $subject->hourly_load;
+                Course::whereId($course)->update(array('hourly_load' => $newHourlyLoad));
+
+                $subject_courses = SubjectCourse::select(DB::raw('COUNT(*) as quantity'))
+                    ->where('tb_subject_course.subject_id', $id)
+                    ->get();
+
+                if($subject_courses->quantity <= 0){
+                    Subject::find($id)->delete();
+                }
+            }
+        }
+
+        return redirect()->route('subjects.index')
+            ->with('success','Curso editado com sucesso');
     }
 
     /**
