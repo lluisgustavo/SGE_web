@@ -46,7 +46,7 @@
                                             <a class="" href="{{ route('subjects.edit', $subject->id) }}"><i class="fas fa-pencil-alt"></i></a>
                                             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" style="margin-left: 0.2em;">
                                                 <i class="fas fa-trash"></i>
-                                                <form style="display: none" action="{{ route('subjects.destroy', $subject->id) }}" method="POST">
+                                                <form style="display: none" action="{{ route('subjects.destroy', [$subject->id]) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
