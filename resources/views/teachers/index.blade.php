@@ -41,10 +41,10 @@
                                     <td>{{$teachers->department_name }} </td>
                                     <td class="text-right">
                                         <div class="row">
-                                            <a class="" href="{{ route('subjects.edit', $teachers->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                            <a class="" href="{{ route('teachers.edit', $teachers->id) }}"><i class="fas fa-pencil-alt"></i></a>
                                             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" style="margin-left: 0.2em;">
                                                 <i class="fas fa-trash"></i>
-                                                <form style="display: none" action="{{ route('subjects.destroy', $teachers->id) }}" method="POST">
+                                                <form style="display: none" action="{{ route('teachers.destroy', $teachers->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
